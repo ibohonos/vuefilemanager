@@ -11,6 +11,7 @@ use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use TeamTNT\TNTSearch\Indexer\TNTIndexer;
+use TeamTNT\TNTSearch\Engines\SqliteEngine;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use Domain\Traffic\Actions\RecordUploadAction;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -196,9 +197,9 @@ class File extends Model
             mb_strtolower($this->name, 'UTF-8'),
             'UTF-8'
         );
-
-        $trigram = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$name]));
+        $engine = new SqliteEngine;
+        $indexer = new TNTIndexer($engine);
+        $trigram = $indexer->buildTrigrams(implode(', ', [$name]));
 
         return [
             'id'         => $this->id,

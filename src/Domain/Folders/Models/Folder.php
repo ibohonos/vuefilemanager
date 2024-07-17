@@ -10,6 +10,7 @@ use Kyslik\ColumnSortable\Sortable;
 use Database\Factories\FolderFactory;
 use Illuminate\Database\Eloquent\Model;
 use TeamTNT\TNTSearch\Indexer\TNTIndexer;
+use TeamTNT\TNTSearch\Engines\SqliteEngine;
 use Domain\Teams\Models\TeamFolderInvitation;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -218,8 +219,9 @@ class Folder extends Model
             'UTF-8'
         );
 
-        $trigram = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$name]));
+        $engine = new SqliteEngine;
+        $indexer = new TNTIndexer($engine);
+        $trigram = $indexer->buildTrigrams(implode(', ', [$name]));
 
         return [
             'id'         => $this->id,

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use TeamTNT\TNTSearch\Indexer\TNTIndexer;
 use Database\Factories\UserSettingFactory;
+use TeamTNT\TNTSearch\Engines\SqliteEngine;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UserSetting extends Model
@@ -80,12 +81,10 @@ class UserSetting extends Model
             mb_strtolower($this->name, 'UTF-8'),
             'UTF-8'
         );
-
-        $nameNgrams = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$name]));
-
-        $emailNgrams = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$this->user->email]));
+        $engine = new SqliteEngine;
+        $indexer = new TNTIndexer($engine);
+        $nameNgrams = $indexer->buildTrigrams(implode(', ', [$name]));
+        $emailNgrams = $indexer->buildTrigrams(implode(', ', [$this->user->email]));
 
         return [
             'id'          => $this->id,
