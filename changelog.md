@@ -1,3 +1,9 @@
+## Version 2.3.0
+#### Release date: 18. June 2024
+- Updated min php version to 8.2
+- Updated laravel to 11 version
+- Fixed errors on console
+
 ## Version 2.2.7
 #### Release date: 20. August 2022
 - fixed upload button issue in mobile
