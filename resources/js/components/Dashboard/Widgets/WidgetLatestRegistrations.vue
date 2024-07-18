@@ -195,7 +195,7 @@
                 </td>
                 <td class="px-3 md:px-1">
                     <span class="text-sm font-bold">
-                        {{ row.data.meta.usages ? row.data.meta.usages.featureEstimates.storage.usage : '-' }}
+                        {{ row.data.meta.usages ? row.data.meta.usages.featureEstimates.storage ? row.data.meta.usages.featureEstimates.storage.usage : row.data.meta.usages.featureEstimates.flatFee.usage : '-' }}
                     </span>
                 </td>
                 <td class="px-3 md:px-1">
@@ -297,6 +297,10 @@ export default {
                         label: this.$t('role'),
                         field: 'role',
                         sortable: true,
+                    },
+                    {
+                        label: this.$t('subscription'),
+                        sortable: false,
                     },
                     {
                         label: this.$t('storage_used'),

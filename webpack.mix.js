@@ -15,7 +15,7 @@ mix
     .js('resources/js/main.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css/app.css', {
-        implementation: require('node-sass')
+        implementation: require('sass')
     })
     .postCss("resources/css/tailwind.css", "public/css/tailwind.css", [
         require("tailwindcss"),

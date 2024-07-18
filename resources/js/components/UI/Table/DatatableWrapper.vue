@@ -28,7 +28,7 @@
                 </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body" v-if="data">
                 <slot v-for="row in data.data" :row="row">
                     <DatatableCell :data="row" :key="row.id" />
                 </slot>
@@ -274,10 +274,13 @@ export default {
 
             this.isLoading = true
 
+            console.log(this.URI)
+
             // Get data
             axios
                 .get(this.URI)
                 .then((response) => {
+                    console.log(response.data)
                     this.data = response.data
                     this.$emit('data', response.data)
                 })

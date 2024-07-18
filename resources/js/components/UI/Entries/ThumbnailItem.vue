@@ -1,5 +1,5 @@
 <template>
-    <div class="flex select-none items-center rounded-xl" spellcheck="false">
+    <div class="flex select-none items-center rounded-xl" spellcheck="false" v-if="item">
         <!--Item thumbnail-->
         <div class="relative w-16 shrink-0">
             <!--Member thumbnail for team folders-->

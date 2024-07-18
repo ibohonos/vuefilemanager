@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between">
-        <div class="flex items-center leading-none">
+        <div class="flex items-center leading-none" v-if="user">
             <MemberAvatar :size="52" :is-border="false" :member="user" />
             <div class="pl-4">
                 <b class="mb-1 block font-bold leading-none">
